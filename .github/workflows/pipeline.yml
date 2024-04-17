@@ -28,6 +28,7 @@ jobs:
       - name: Create Conda environment
         run: |
           conda env create -f ./src/environment.yml
+          conda init --all
           conda activate Biomass_Pipeline || true
 
       - name: Run Tests
