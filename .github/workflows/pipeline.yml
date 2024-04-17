@@ -32,6 +32,7 @@ jobs:
         run: |
           conda init bash
           eval "$(/home/runner/miniconda/bin/conda shell.bash hook)"
+          source ~/.bashrc
 
       - name: Activate Conda environment
         run: conda activate Biomass_Pipeline
