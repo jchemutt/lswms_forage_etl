@@ -26,6 +26,9 @@ jobs:
       - name: Create Conda environment
         run: conda env create -f ./src/environment.yml
 
+      - name: Initialize Conda
+        run: conda init
+
       - name: Activate Conda environment
         run: conda activate Biomass_Pipeline
 
