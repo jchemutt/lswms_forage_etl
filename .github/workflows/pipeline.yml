@@ -31,8 +31,7 @@ jobs:
       - name: Activate Conda environment
         run: |
           export PATH="$HOME/miniconda/bin:$PATH"
-          source "$HOME/miniconda/etc/profile.d/conda.sh"
-          conda activate activate Biomass_Pipeline
+          conda activate Biomass_Pipeline
 
       - name: Run Tests
         run: |
