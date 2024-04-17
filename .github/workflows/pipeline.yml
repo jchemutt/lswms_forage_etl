@@ -28,14 +28,11 @@ jobs:
       - name: Create Conda environment
         run: conda env create -f ./src/environment.yml
 
-      - name: Initialize Conda
-        run: |
-          conda init bash
-          eval "$(/home/runner/miniconda3/bin/conda shell.bash hook)"
-          source ~/.bashrc
-
       - name: Activate Conda environment
-        run: conda activate Biomass_Pipeline
+        run: |
+          export PATH="$HOME/miniconda3/bin:$PATH"
+          source "$HOME/miniconda3/etc/profile.d/conda.sh"
+          conda activate Biomass_Pipeline
 
       - name: Run Tests
         run: |
