@@ -25,14 +25,13 @@ jobs:
         with:
           miniconda-version: "latest"
 
+      - name: Create Conda environment
+        run: conda env create -f ./src/environment.yml
+
       - name: Initialize Conda
         run: |
           conda init bash
-          CONDA_PATH=$HOME/miniconda
-          eval "$($CONDA_PATH/bin/conda shell.bash hook)"
-
-      - name: Create Conda environment
-        run: conda env create -f ./src/environment.yml
+          eval "$(/home/runner/miniconda/bin/conda shell.bash hook)"
 
       - name: Activate Conda environment
         run: conda activate Biomass_Pipeline
