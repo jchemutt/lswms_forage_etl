@@ -31,7 +31,7 @@ jobs:
       - name: Initialize Conda
         run: |
           conda init bash
-          eval "$(/home/runner/miniconda/bin/conda shell.bash hook)"
+          eval "$(/home/runner/miniconda3/bin/conda shell.bash hook)"
           source ~/.bashrc
 
       - name: Activate Conda environment
