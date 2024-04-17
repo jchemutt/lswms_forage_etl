@@ -14,6 +14,7 @@ class TestRasterize(unittest.TestCase):
         self.outputs_path = os.path.join(self.project_root, 'outputs')
         self.temp_raster_files=os.path.join(self.outputs_path, 'temp_raster_files')
         self.test_results= os.path.join(self.outputs_path,  "test_results.csv")
+        os.makedirs(self.temp_raster_files, exist_ok=True)
         self.test_raster= os.path.join(self.outputs_path,  "test_raster.tif")
         # Create a temporary results CSV file with test data
         self.test_data = pd.DataFrame({'lon': [39.41, 39.445, 39.492], 'lat': [3.271, 3.261, 3.254], 'date': [20240101,20240101,20240101],'year': [2024, 2024, 2024],
