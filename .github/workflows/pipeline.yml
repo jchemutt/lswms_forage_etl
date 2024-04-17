@@ -17,20 +17,19 @@ jobs:
 
   TestETL:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Conda
         uses: conda-incubator/setup-miniconda@v3
-
-      - name: Create Conda environment
-        run: conda env create -f ./src/environment.yml
-
-      - name: Initialize Conda
-        run: conda init
-
-      - name: Activate Conda environment
-        run: conda activate Biomass_Pipeline
+        with:
+          activate-environment: Biomass_Pipeline
+          environment-file: ./src/environment.yml
+          python-version: 3.12
+          auto-activate-base: false
 
       - name: Run Tests
         run: |
