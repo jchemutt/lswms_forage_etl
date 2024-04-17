@@ -25,12 +25,14 @@ jobs:
         with:
           miniconda-version: "latest"
 
-      - name: Create Conda environment
-        run: |
-          conda env create -f ./src/environment.yml
-          conda init --all
-          conda activate Biomass_Pipeline || true
+      - name: Initialize Conda
+        run: conda init bash
 
+      - name: Create Conda environment
+        run: conda env create -f ./src/environment.yml
+
+      - name: Activate Conda environment
+        run: source $HOME/miniconda/etc/profile.d/conda.sh && conda activate activate Biomass_Pipeline
       - name: Run Tests
         run: |
           python -m unittest discover -s ./src/tests/ -p 'test_*.py'
