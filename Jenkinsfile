@@ -31,10 +31,10 @@ pipeline {
                 script {
                     sshCommand remote: remote, command: """
                         
-                        if [ ! -d forage_etl ]; then
-                            mkdir ./forage_etl
+                        if [ ! -d /home/admin01/forage_etl ]; then
+                            mkdir ./home/admin01/forage_etl
                         fi
-                        cd /forage_etl
+                        cd /home/admin01/forage_etl
                         rm -rf src
                         curl -LOk https://github.com/jchemutt/lswms_forage_etl/releases/latest/download/releaseForageEtl.zip
                         unzip -o releaseForageEtl.zip
