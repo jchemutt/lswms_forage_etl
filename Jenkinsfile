@@ -7,7 +7,9 @@ pipeline {
 
     environment {
         server_host = credentials('forage_host_test')
-        credentials_id = 'forage_devops_test'
+        user = credentials('forage_test_user')
+        password = credentials('forage_test_pass')
+        
     }
 
     stages {
@@ -15,14 +17,11 @@ pipeline {
             steps {
                 script {
                     // Set up remote SSH connection parameters
-                    withCredentials([usernamePassword(credentialsId: credentials_id, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    
                     remote.allowAnyHosts = true
-                    remote.user = $USERNAME
-                    remote.password = $PASSWORD
+                    remote.user = user
+                    remote.password = password
                     remote.host = server_host
-
-                     }
-                   
                     
                 }
             }
