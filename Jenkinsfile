@@ -7,9 +7,8 @@ pipeline {
 
     environment {
         server_host = credentials('forage_host_test')
-        name = credentials('forage_test_name')
-        user = credentials('forage_test_user')
-        password = credentials('forage_test_pass')
+        server_name = credentials('forage_test_name')
+        ssh_key = credentials('forage_etl_devops')
         
     }
 
@@ -20,9 +19,9 @@ pipeline {
                     // Set up remote SSH connection parameters
                     
                     remote.allowAnyHosts = true
-                    remote.user = user
-                    remote.password = password
-                    remote.name = name
+                    remote.identityFile = ssh_key
+                    remote.user = ssh_key_USR
+                    remote.name = server_name
                     remote.host = server_host
                     
                 }
