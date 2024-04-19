@@ -11,28 +11,31 @@ pipeline {
     }
 
     stages {
-        stage('Ssh to connect bigelow server') {
+        stage('Ssh to connect test server') {
             steps {
                 script {
                     // Set up remote SSH connection parameters
-                    def credentials = usernamePassword(credentialsId: credentials_id, usernameVariable: 'username', passwordVariable: 'password')
+                    withCredentials([usernamePassword(credentialsId: credentials_id, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     remote.allowAnyHosts = true
-                    remote.user = credentials.username
-                    remote.password = credentials.password
+                    remote.user = $USERNAME
+                    remote.password = $PASSWORD
                     remote.host = server_host
+
+                     }
+                   
                     
                 }
             }
         }
-        stage('Download latest release and create enviroment') {
+        stage('Download latest release') {
             steps {
                 script {
                     sshCommand remote: remote, command: """
                         
-                        if [ ! -d api_WP ]; then
-                            mkdir ./api_WP
+                        if [ ! -d forage_etl ]; then
+                            mkdir ./forage_etl
                         fi
-                        cd /api_WP
+                        cd /forage_etl
                         rm -rf src
                         curl -LOk https://github.com/jchemutt/lswms_forage_etl/releases/latest/download/releaseForageEtl.zip
                         unzip -o releaseForageEtl.zip
