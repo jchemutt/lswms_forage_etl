@@ -58,8 +58,8 @@ pipeline {
                                      file(credentialsId: 'forage_etl_gee_file', variable: 'GEE_FILE')]) {
 
                         // Use SCP to copy the secret files to the remote server
-                        sh "scp -i %ssh_key% %DATA_FILE% %ssh_key_USR%@%server_host%:${remoteDirectory}/data.json"
-                        sh "scp -i %ssh_key% %GEE_FILE% %ssh_key_USR%@%server_host%:${remoteDirectory}/private_key.json"
+                        sh 'scp -i $ssh_key \$DATA_FILE $ssh_key_USR@$server_host:${remoteDirectory}/data.json'
+                        sh 'scp -i $ssh_key \$GEE_FILE $ssh_key_USR@$server_host:${remoteDirectory}/private_key.json'
                                      }
                         } catch (Exception e) {
                         // Log any errors that occur during download
