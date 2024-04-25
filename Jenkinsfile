@@ -33,13 +33,6 @@ pipeline {
                         unzip -o releaseForageEtl.zip
                         rm -fr releaseForageEtl.zip
                         
-                        # Copy secret files from Jenkins credentials to the remote server
-                        withCredentials([file(credentialsId: 'forage_etl_data_file', variable: 'DATA_FILE'),
-                                         file(credentialsId: 'forage_etl_gee_file', variable: 'GEE_FILE')]) {
-                            sh "scp -i ${ssh_key} \${DATA_FILE} ${ssh_key_USR}@${server_host}:/opt/etlwms/src/data.json"
-                            sh "scp -i ${ssh_key} \${GEE_FILE} ${ssh_key_USR}@${server_host}:/opt/etlwms/src/private_key.json"
-                            
-                        }
                 
                     """
                 }
