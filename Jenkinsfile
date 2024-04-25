@@ -26,15 +26,21 @@ pipeline {
         stage('Download latest release') {
             steps {
                 script {
-                    sshCommand remote: remote, command: """
-                        cd /opt/etlwms
-                        rm -rf src
-                        curl -LOk https://github.com/jchemutt/lswms_forage_etl/releases/latest/download/releaseForageEtl.zip
-                        unzip -o releaseForageEtl.zip
-                        rm -fr releaseForageEtl.zip
-                        
-                
-                    """
+                    try {
+                        echo "Downloading latest release..."
+                        sshCommand remote: remote, command: """
+                            cd /opt/etlwms
+                            rm -rf src
+                            curl -LOk https://github.com/jchemutt/lswms_forage_etl/releases/latest/download/releaseForageEtl.zip
+                            unzip -o releaseForageEtl.zip
+                            rm -fr releaseForageEtl.zip
+                        """
+                        echo "Download completed."
+                    } catch (Exception e) {
+                        // Log any errors that occur during download
+                        echo "Failed to download latest release: ${e.getMessage()}"
+                        error "Failed to download latest release"
+                    }
                 }
             }
         }
